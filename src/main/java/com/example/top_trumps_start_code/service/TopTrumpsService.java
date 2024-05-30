@@ -2,11 +2,13 @@ package com.example.top_trumps_start_code.service;
 
 
 import com.example.top_trumps_start_code.models.Card;
+//import com.example.top_trumps_start_code.models.Deck;
 import com.example.top_trumps_start_code.models.Rank;
 import com.example.top_trumps_start_code.models.Suit;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 @Service
 public class TopTrumpsService {
@@ -14,7 +16,7 @@ public class TopTrumpsService {
     private Rank rank;
     private Suit suit;
     private Card card;
-    private ArrayList<Card> cards;
+    private ArrayList<Card> deck;
 
     public TopTrumpsService() {
 
@@ -22,6 +24,7 @@ public class TopTrumpsService {
 
     public String checkWinner(Card card1, Card card2) {
 
+        this.playRound(deck);
 
         if (card1.getCardValue() > card2.getCardValue()) {
             return card1 + " wins!";
@@ -30,6 +33,15 @@ public class TopTrumpsService {
         } else {
             return "It's a draw!";
         }
+
+
+
+
+
+
+
+
+
         // How does this print the correct form ''
 
 
@@ -58,6 +70,46 @@ public class TopTrumpsService {
 //        return "It's a draw!";
 
     }
+
+    public void initializeDeck() {
+        deck = new ArrayList<>();
+        for (Suit suit : Suit.values()) {
+            for (Rank rank : Rank.values()) {
+                deck.add(new Card(rank, suit));
+            }
+        }
+        Collections.shuffle(deck);
+    }
+
+
+
+    public String startNewGame() {
+        initializeDeck();
+//        System.out.println(deck.size());
+        return "Let's start a new game";
+    }
+
+    public String playRound(ArrayList<Card> cards) {
+        if (cards.size() != 2) {
+            return " Get two cards";
+        }
+
+        // add remove card function here
+//        if (!deck.contains(card1) || !deck.contains(card2)) {
+//            return "Invalid cards provided. Please play with cards from the current deck.";
+//        }
+
+//        deck.remove(card1);
+//        deck.remove(card2);
+
+        // call method  - maybe in controller not here
+//        this.checkWinner(card1, card2);
+
+        return "Invalid";
+    }
+
+
+
 
 
 
