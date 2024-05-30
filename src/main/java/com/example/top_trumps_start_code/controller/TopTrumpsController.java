@@ -20,20 +20,16 @@ public class TopTrumpsController {
     @Autowired
     TopTrumpsService topTrumpsService;
 
-//    @PostMapping
-//    public ResponseEntity<ArrayList<Card>> playGame() {
-//        ArrayList <Card> card = topTrumpsService.playGame();
-//        return new ResponseEntity<ArrayList<Card>>(card, HttpStatus.CREATED);
-//    }
-
     @PostMapping
     public ResponseEntity<String> playRound(@RequestBody ArrayList<Card> cards) {
         if (cards.size() <= 2) {
-            return new ResponseEntity<>("Game started", HttpStatus.OK);
+            return new ResponseEntity<>(topTrumpsService.checkWinner(cards.get(0),cards.get(1)), HttpStatus.OK);
         }
 
         return null;
     }
+
+
 
 
 }
